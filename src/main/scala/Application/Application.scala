@@ -6,10 +6,13 @@ object Application {
   def main (args: Array[String]): Unit = {
 
     val userName = StdIn.readLine("Please enter your name").trim.toUpperCase
-    val game = new NoughtsAndCrosses(userName)
 
-    game.offerRulesToUser()
-    game.playGameRecursive()
+    val UI = new UserInterface(userName)
+    val gameMechanics = new NoughtsAndCrosses
+
+
+    UI.offerRulesToUser()
+    UI.playGameRecursive()
   }
 }
 
