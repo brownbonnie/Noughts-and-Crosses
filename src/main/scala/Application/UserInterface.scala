@@ -2,7 +2,7 @@ package Application
 import scala.annotation.tailrec
 import scala.io.StdIn
 
-class NoughtsAndCrosses (userName: String) {
+class UserInterface(userName: String) {
 
   def offerRulesToUser(): Unit = {
     println(
