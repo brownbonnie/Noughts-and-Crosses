@@ -6,13 +6,11 @@ class GameBoardSpec extends FunSuite {
 
   test ("def changeSquare correctly changes state") {
 
-    val squareA1 = new Square(" ")
-    val game = new GameBoard(squareA1)
+    val square1 = new Square(" ")
+    val game = new GameBoard(square1)
 
-    val resultingSquare = game.changeSquare("X")
+    val resultingSquareState = game.changeSquare("X").state
 
-    assert(
-      game.changeSquare("X").state == resultingSquare.state
-    )
+    assert(resultingSquareState == "X")
   }
 }

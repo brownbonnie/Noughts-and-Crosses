@@ -1,5 +1,5 @@
 package Application
 
-class Square (val state: String) {
+class Square (var state: String) {
 
 }
