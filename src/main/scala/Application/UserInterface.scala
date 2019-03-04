@@ -26,7 +26,7 @@ class UserInterface(userName: String) {
 
   @tailrec
   final def getUserInputUntilValid(validItems: List[String]): String = {
-    val input = StdIn.readLine.trim.toLowerCase
+    val input = StdIn.readLine.trim
 
     if (validItems.contains(input)) {
       input
@@ -40,8 +40,8 @@ class UserInterface(userName: String) {
   @tailrec
   final def playGameRecursive(numberOfGames: Int = 0): Unit = {
     println(
-      s"\n*~Would you like to play?~*" +
-        s"\n Please enter yes or no."
+      s"\n\t~*Ready to play?*~" +
+        s"\n  Please enter yes or no."
     )
 
     val userPlayChoice = getUserInputUntilValid(List("yes", "no"))
@@ -57,17 +57,21 @@ class UserInterface(userName: String) {
     }
   }
 
+  def userPickXOrO(): String = {
+    println("Please pick either X or O.")
+
+    getUserInputUntilValid(List("X", "O"))
+                    .replace(" ", "")
+                    .replace("0", "O")
+                    .toUpperCase
+  }
+
   def startGame(): Unit = {
     println(
       "┌───────────────────────────────┐\n" +
       "│Welcome to Noughts and Crosses!│\n" +
-      "│    Please enter your name.    │\n" +
       "└───────────────────────────────┘\n"
     )
-
-    println("Please pick either X or O.")
-    val isUserXOrO = getUserInputUntilValid(List("X", "O", "x", "o", "0"))
-      .replace(" ", "")
 
     println(
       s"Okay $userName, please pick your character.           \n\n" +
@@ -80,9 +84,8 @@ class UserInterface(userName: String) {
     startingScreen()
   }
 
-  def userPickCharacter(): String = getUserInputUntilValid(List("A", "B", "C", "a", "b", "c"))
-                               .replace(" ", "")
-                               .toUpperCase
+  def userPickCharacter(): String = getUserInputUntilValid(List("A", "B", "C"))
+                                   .replace(" ", "")
 
   def startingScreen(): Unit = userPickCharacter() match {
      case "A" =>
@@ -156,6 +159,11 @@ class UserInterface(userName: String) {
               "└───────────────────────┘\n"
           )
         }
+
+  def userPickSquare(): Square = {
+    val userSquareChoice = StdIn.readLine("Choose a square")
+    new Square("", userSquareChoice)
+  }
 
   def thanksForPlaying(): Unit = {
       println(

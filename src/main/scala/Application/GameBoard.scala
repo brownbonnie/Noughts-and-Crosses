@@ -1,13 +1,9 @@
 package Application
 
-class GameBoard (square: Square) {
+class GameBoard (squares: Array[Square]) {
 
-  def changeSquare (userChoice: String): Square = {
-    userChoice match {
-      case "X" => new Square(state = "X")
-      case "O" => new Square(state = "O")
-      case _   => square
-    }
+  def changeSquare (square: Square, userXOrOChoice: String): Square = {
+    new Square(square.position, userXOrOChoice)
   }
 
 }

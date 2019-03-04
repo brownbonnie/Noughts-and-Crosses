@@ -4,13 +4,32 @@ import org.scalatest.FunSuite
 
 class GameBoardSpec extends FunSuite {
 
-  test ("def changeSquare correctly changes state") {
+  test ("changeSquare returns new Square A1 with state 'X'.") {
 
-    val square1 = new Square(" ")
-    val game = new GameBoard(square1)
+    val A1 = new Square(state = "", position = "A1")
+    val A2 = new Square(state = "", position = "A2")
+    val A3 = new Square(state = "", position = "A3")
 
-    val resultingSquareState = game.changeSquare("X").state
+    val game = new GameBoard(Array(A1, A2, A3))
+
+    val resultingSquareState = game.changeSquare(A1, userXOrOChoice = "X")
+                                   .state
 
     assert(resultingSquareState == "X")
+
+  }
+
+  test ("changeSquare returns new Square A1 with state 'O'.") {
+
+    val A1 = new Square(state = "", position = "A1")
+    val A2 = new Square(state = "", position = "A2")
+    val A3 = new Square(state = "", position = "A3")
+
+    val game = new GameBoard(Array(A1, A2, A3))
+
+    val resultingSquareState = game.changeSquare(A1, userXOrOChoice = "O")
+                                   .state
+
+    assert(resultingSquareState == "O")
   }
 }
