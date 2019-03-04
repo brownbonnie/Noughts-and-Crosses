@@ -1,24 +1,18 @@
 package Application
 
-import scala.annotation.tailrec
-import scala.io.StdIn
-
-class GameBoard (squares: Array[Square]) {
+class GameBoard (squares: Array[Square], userMoves: Array[Square] = Array()) {
 
   def changeSquare (square: Square, userXOrOChoice: String): Square = {
     new Square(square.position, userXOrOChoice)
   }
 
-  @tailrec
-  final def userPickSquare(userXOrOChoice: String = "", numSquaresChosen: Int = 0): Square = {
-    val userSquareChoice = StdIn.readLine("Please choose a square.")
+//  def monitorUntilGameOver() = {
+//    squares match {
+//      case lose if     => println("Sorry, you lost.")
+//      case win         => println("You won!")
+//      case keepPlaying => println("Keep playing")
+//      case _           => println("Something went wrong.")
+//    }
+//  }
 
-    if (numSquaresChosen > 9) {
-      new Square("", "")
-    }
-    else {
-      new Square(userXOrOChoice, userSquareChoice)
-      userPickSquare(userXOrOChoice, numSquaresChosen + 1)
-    }
-  }
 }
