@@ -1,8 +1,8 @@
 import Application.GameBoard
 import Application.Square
-import org.scalatest.FunSuite
+import org.scalatest.{FunSuite, Matchers}
 
-class GameBoardSpec extends FunSuite {
+class GameBoardSpec extends FunSuite with Matchers{
 
   test ("changeSquare returns new Square A1 with state 'X'.") {
 
@@ -16,6 +16,7 @@ class GameBoardSpec extends FunSuite {
                                    .state
 
     assert(resultingSquareState == "X")
+    resultingSquareState shouldBe "X"
 
   }
 
