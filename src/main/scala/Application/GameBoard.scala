@@ -13,7 +13,6 @@ class GameBoard (squares: Array[Square]) {
   final def userPickSquare(userXOrOChoice: String = "", numSquaresChosen: Int = 0): Square = {
     val userSquareChoice = StdIn.readLine("Please choose a square.")
 
-
     if (numSquaresChosen > 9) {
       new Square("", "")
     }
