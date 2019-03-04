@@ -5,16 +5,24 @@ object Application {
 
   def main (args: Array[String]): Unit = {
 
-    val userName = StdIn.readLine("Please enter your name").trim.toUpperCase
+    val A1 = new Square(state = "", position = "A1")
+    val A2 = new Square(state = "", position = "A2")
+    val A3 = new Square(state = "", position = "A3")
+    val game = new GameBoard(Array(A1, A2, A3))
+
+    val userName = StdIn.readLine("Please enter your name")
+
     val interface = new UserInterface(userName)
 
     interface.offerRulesToUser()
     interface.playGameRecursive()
 
-    val square = new Square(" ")
-    val game = new GameBoard(square)
+    val userXOrOChoice = interface.userPickXOrO
 
-    print(game.changeSquare(userChoice = "X"))
+    val userSquareChoice = interface.userPickSquare()
+
+    println(game.changeSquare(userSquareChoice, userXOrOChoice))
+
   }
 }
 
