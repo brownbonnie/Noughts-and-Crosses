@@ -9,18 +9,12 @@ object Application {
     val A3 = new Square(state = "", position = "A3")
     val game = new GameBoard(Array(A1, A2, A3))
 
-    val userName = new UserInput("Please enter your name.").toString
+    val userName = new UserInput(messageToUser = "Please enter your name.").toString
 
     val interface = new UserInterface(userName)
 
     interface.offerRulesToUser()
     interface.playGameRecursive()
-
-    val userXOrOChoice = interface.userPickXOrO()
-
-    val userSquareChoice = interface.userPickSquare()
-
-    game.changeSquare(userSquareChoice, userXOrOChoice)
 
   }
 }
