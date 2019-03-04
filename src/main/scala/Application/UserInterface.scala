@@ -1,28 +1,14 @@
 package Application
-
 import scala.annotation.tailrec
 import scala.io.StdIn
 
 class UserInterface(userName: String) {
 
-  @tailrec
-  final def getUserInputUntilValid(validItems: List[String]): String = {
-    val input = StdIn.readLine.trim.toLowerCase
-
-    if (validItems.contains(input)) {
-      input
-    }
-    else {
-      println(s"Please choose one of the following: ${validItems.mkString(", ")}")
-      getUserInputUntilValid(validItems)
-    }
-  }
-
   def offerRulesToUser(): Unit = {
     println(
       "\t\t\t~~Noughts and Crosses~~\n" +
-        "\nWould you like to view the rules?\n" +
-        "\nPlease enter yes or no."
+      "\nWould you like to view the rules?\n" +
+      "\nPlease enter yes or no."
     )
 
     val doesUserWantRules = getUserInputUntilValid(
@@ -39,10 +25,23 @@ class UserInterface(userName: String) {
   }
 
   @tailrec
+  final def getUserInputUntilValid(validItems: List[String]): String = {
+    val input = StdIn.readLine.trim
+
+    if (validItems.contains(input)) {
+      input
+    }
+    else {
+      println(s"Please choose one of the following: ${validItems.mkString(", ")}")
+      getUserInputUntilValid(validItems)
+    }
+  }
+
+  @tailrec
   final def playGameRecursive(numberOfGames: Int = 0): Unit = {
     println(
-      s"\n*~Would you like to play?~*" +
-        s"\n Please enter yes or no."
+      s"\n\t~*Ready to play?*~" +
+        s"\n  Please enter yes or no."
     )
 
     val userPlayChoice = getUserInputUntilValid(List("yes", "no"))
@@ -58,94 +57,21 @@ class UserInterface(userName: String) {
     }
   }
 
-  def userPickCharacter(): String = getUserInputUntilValid(List("A", "B", "C", "a", "b", "c"))
-    .replace(" ", "")
-    .toUpperCase
+  def userPickXOrO(): String = {
+    println("Please pick either X or O.")
 
-  def startingScreen(): Unit = userPickCharacter() match {
-    case "A" =>
-      println(
-        "                           \n" +
-          " ┌──────────────────────┐\n" +
-          " │■■■■■■■■■■KO■■■■■■■■■■│\n" +
-          " └──────────────────────┘\n" +
-          "  ฅ^•ﻌ•^ฅ      \uD83D\uDCAA( ⌣̀‸⌣́) \n" +
-          s" COMPUTER       $userName\n" +
-          "                         \n" +
-          "┌───────────────────────┐\n" +
-          "│       │       │       │\n" +
-          "│       │       │       │\n" +
-          "│       │       │       │\n" +
-          "│ ───────────────────── │\n" +
-          "│       │       │       │\n" +
-          "│       │       │       │\n" +
-          "│       │       │       │\n" +
-          "│ ───────────────────── │\n" +
-          "│       │       │       │\n" +
-          "│       │       │       │\n" +
-          "│       │       │       │\n" +
-          "└───────────────────────┘\n"
-      )
-
-    case "B" =>
-      println(
-        "                          \n" +
-          " ┌──────────────────────┐\n" +
-          " │■■■■■■■■■■KO■■■■■■■■■■│\n" +
-          " └──────────────────────┘\n" +
-          "  ฅ^•ﻌ•^ฅ       (⊙_⊙;) \n" +
-          s" COMPUTER       $userName\n" +
-          "                         \n" +
-          "┌───────────────────────┐\n" +
-          "│       │       │       │\n" +
-          "│       │       │       │\n" +
-          "│       │       │       │\n" +
-          "│ ───────────────────── │\n" +
-          "│       │       │       │\n" +
-          "│       │       │       │\n" +
-          "│       │       │       │\n" +
-          "│ ───────────────────── │\n" +
-          "│       │       │       │\n" +
-          "│       │       │       │\n" +
-          "│       │       │       │\n" +
-          "└───────────────────────┘\n"
-      )
-
-    case "C" =>
-      println(
-        "                         \n" +
-          " ┌──────────────────────┐\n" +
-          " │■■■■■■■■■■KO■■■■■■■■■■│\n" +
-          " └──────────────────────┘\n" +
-          "  ฅ^•ﻌ•^ฅ      ლ(¯ロ¯ლ)  \n" +
-          s" COMPUTER       $userName\n" +
-          "┌───────────────────────┐\n" +
-          "│       │       │       │\n" +
-          "│       │       │       │\n" +
-          "│       │       │       │\n" +
-          "│ ───────────────────── │\n" +
-          "│       │       │       │\n" +
-          "│       │       │       │\n" +
-          "│       │       │       │\n" +
-          "│ ───────────────────── │\n" +
-          "│       │       │       │\n" +
-          "│       │       │       │\n" +
-          "│       │       │       │\n" +
-          "└───────────────────────┘\n"
-      )
+    getUserInputUntilValid(List("X", "O"))
+                    .replace(" ", "")
+                    .replace("0", "O")
+                    .toUpperCase
   }
 
   def startGame(): Unit = {
     println(
       "┌───────────────────────────────┐\n" +
-        "│Welcome to Noughts and Crosses!│\n" +
-        "│    Please enter your name.    │\n" +
-        "└───────────────────────────────┘\n"
+      "│Welcome to Noughts and Crosses!│\n" +
+      "└───────────────────────────────┘\n"
     )
-
-    println("Please pick either X or O.")
-    val isUserXOrO = getUserInputUntilValid(List("X", "O", "x", "o", "0"))
-      .replace(" ", "")
 
     println(
       s"Okay $userName, please pick your character.           \n\n" +
@@ -158,14 +84,95 @@ class UserInterface(userName: String) {
     startingScreen()
   }
 
-  def thanksForPlaying(): Unit = {
-    println(
-      "┌───────────\"^.--.^\"───────────┐\n" +
-        "│      Thanks for playing!     │\n"   +
-        "└──────────────────────────────┘\n\n" +
-        "\n\n\nCredit for ASCII art goes to:\n"+
-        "http://textart4u.blogspot.com/2013/03/one-line-ascii-text-art.html\n" +
-        "https://kawaiiface.net/\n"            +
-        "https://www.messletters.com/en/shapes/\n\n")
+  def userPickCharacter(): String = getUserInputUntilValid(List("A", "B", "C"))
+                                   .replace(" ", "")
+
+  def startingScreen(): Unit = userPickCharacter() match {
+     case "A" =>
+          println(
+            "                           \n" +
+              " ┌──────────────────────┐\n" +
+              " │■■■■■■■■■■KO■■■■■■■■■■│\n" +
+              " └──────────────────────┘\n" +
+              "  ฅ^•ﻌ•^ฅ      \uD83D\uDCAA( ⌣̀‸⌣́) \n" +
+              s" COMPUTER       $userName\n" +
+              "                         \n" +
+              "┌───────────────────────┐\n" +
+              "│       │       │       │\n" +
+              "│       │       │       │\n" +
+              "│       │       │       │\n" +
+              "│ ───────────────────── │\n" +
+              "│       │       │       │\n" +
+              "│       │       │       │\n" +
+              "│       │       │       │\n" +
+              "│ ───────────────────── │\n" +
+              "│       │       │       │\n" +
+              "│       │       │       │\n" +
+              "│       │       │       │\n" +
+              "└───────────────────────┘\n"
+          )
+
+        case "B" =>
+          println(
+             "                          \n" +
+              " ┌──────────────────────┐\n" +
+              " │■■■■■■■■■■KO■■■■■■■■■■│\n" +
+              " └──────────────────────┘\n" +
+              "  ฅ^•ﻌ•^ฅ       (⊙_⊙;) \n" +
+              s" COMPUTER       $userName\n" +
+              "                         \n" +
+              "┌───────────────────────┐\n" +
+              "│       │       │       │\n" +
+              "│       │       │       │\n" +
+              "│       │       │       │\n" +
+              "│ ───────────────────── │\n" +
+              "│       │       │       │\n" +
+              "│       │       │       │\n" +
+              "│       │       │       │\n" +
+              "│ ───────────────────── │\n" +
+              "│       │       │       │\n" +
+              "│       │       │       │\n" +
+              "│       │       │       │\n" +
+              "└───────────────────────┘\n"
+          )
+
+        case "C" =>
+          println(
+              "                         \n" +
+              " ┌──────────────────────┐\n" +
+              " │■■■■■■■■■■KO■■■■■■■■■■│\n" +
+              " └──────────────────────┘\n" +
+              "  ฅ^•ﻌ•^ฅ      ლ(¯ロ¯ლ)  \n" +
+              s" COMPUTER       $userName\n" +
+              "┌───────────────────────┐\n" +
+              "│       │       │       │\n" +
+              "│       │       │       │\n" +
+              "│       │       │       │\n" +
+              "│ ───────────────────── │\n" +
+              "│       │       │       │\n" +
+              "│       │       │       │\n" +
+              "│       │       │       │\n" +
+              "│ ───────────────────── │\n" +
+              "│       │       │       │\n" +
+              "│       │       │       │\n" +
+              "│       │       │       │\n" +
+              "└───────────────────────┘\n"
+          )
+        }
+
+  def userPickSquare(): Square = {
+    val userSquareChoice = StdIn.readLine("Choose a square")
+    new Square("", userSquareChoice)
   }
+
+  def thanksForPlaying(): Unit = {
+      println(
+          "┌───────────\"^.--.^\"───────────┐\n" +
+          "│      Thanks for playing!     │\n"   +
+          "└──────────────────────────────┘\n\n" +
+          "\n\n\nCredit for ASCII art goes to:\n"+
+          "http://textart4u.blogspot.com/2013/03/one-line-ascii-text-art.html\n" +
+          "https://kawaiiface.net/\n"            +
+          "https://www.messletters.com/en/shapes/\n\n")
+    }
 }

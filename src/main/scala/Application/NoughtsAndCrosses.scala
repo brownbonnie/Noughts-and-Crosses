@@ -1,7 +1,0 @@
-package Application
-
-class NoughtsAndCrosses () {
-
-
-
-}
