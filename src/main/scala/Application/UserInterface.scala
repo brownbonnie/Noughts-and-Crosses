@@ -158,11 +158,23 @@ class UserInterface(userName: String) {
               "│       │       │       │\n" +
               "└───────────────────────┘\n"
           )
+
+      userPickSquare()
+
         }
 
-  def userPickSquare(): Square = {
-    val userSquareChoice = StdIn.readLine("Choose a square")
-    new Square("", userSquareChoice)
+  @tailrec
+  final def userPickSquare(userXOrOChoice: String = "", numSquaresChosen: Int = 0): Square = {
+    val userSquareChoice = StdIn.readLine("Please choose a square.")
+
+
+    if (numSquaresChosen > 9) {
+      new Square("", "")
+    }
+    else {
+        new Square(userXOrOChoice, userSquareChoice)
+      userPickSquare(userXOrOChoice, numSquaresChosen + 1)
+    }
   }
 
   def thanksForPlaying(): Unit = {

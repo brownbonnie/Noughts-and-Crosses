@@ -17,11 +17,11 @@ object Application {
     interface.offerRulesToUser()
     interface.playGameRecursive()
 
-    val userXOrOChoice = interface.userPickXOrO
+    val userXOrOChoice = interface.userPickXOrO()
 
     val userSquareChoice = interface.userPickSquare()
 
-    println(game.changeSquare(userSquareChoice, userXOrOChoice))
+    game.changeSquare(userSquareChoice, userXOrOChoice)
 
   }
 }
