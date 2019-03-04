@@ -1,5 +1,4 @@
 package Application
-import scala.io.StdIn
 
 object Application {
 
@@ -10,7 +9,7 @@ object Application {
     val A3 = new Square(state = "", position = "A3")
     val game = new GameBoard(Array(A1, A2, A3))
 
-    val userName = StdIn.readLine("Please enter your name")
+    val userName = new UserInput("Please enter your name.").toString
 
     val interface = new UserInterface(userName)
 
