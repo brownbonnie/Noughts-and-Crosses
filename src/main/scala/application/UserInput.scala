@@ -1,4 +1,4 @@
-package Application
+package application
 import scala.io.StdIn
 
 class UserInput (messageToUser: String) {
